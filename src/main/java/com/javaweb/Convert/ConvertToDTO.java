@@ -21,10 +21,10 @@ public class ConvertToDTO {
 
     public static BuildingDTO ToDTO(BuildingEntity enty) {
         BuildingDTO building = modelMapper.map(enty, BuildingDTO.class); // chuyển dữ liệu từ Entity sang DTO
-        building.setAddress(enty.getStreet() + ", " + enty.getWard() + ", " + enty.getDistrict());
-        List<RentAreaEntity> rentAreas = enty.getRents();
-        String resArea = rentAreas.stream().map(it -> it.getValue().toString()).collect(Collectors.joining(", "));
-        building.setRentArea(resArea);
+        building.setAddress(enty.getStreet() + ", " + enty.getWard() + ", ");
+//        List<RentAreaEntity> rentAreas = enty.getRents();
+//        String resArea = rentAreas.stream().map(it -> it.getValue().toString()).collect(Collectors.joining(", "));
+//        building.setRentArea(resArea);
 
         return building;
     }

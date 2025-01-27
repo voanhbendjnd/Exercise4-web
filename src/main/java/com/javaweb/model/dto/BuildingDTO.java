@@ -26,15 +26,6 @@ public class BuildingDTO extends AbstractDTO{
     private String structure;
     private String direction;
     private String note;
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     private String rentArea;
     private String managerName;
     private String managerPhone;
@@ -44,6 +35,16 @@ public class BuildingDTO extends AbstractDTO{
     private String image;
     private String imageBase64;
     private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
 
     public Long getWaterFee() {
         return waterFee;

@@ -2,10 +2,13 @@ package com.javaweb.controller.admin;
 
 
 
+import com.javaweb.enums.buildingType;
+import com.javaweb.enums.districtCode;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
 import com.javaweb.service.BuildingService;
+import com.javaweb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +23,7 @@ import java.util.List;
 public class BuildingController {
 //    @Autowired
 //    private BuildingService buildingService;
-
+//
 //    @GetMapping(value = "/admin/building-list")
 //    public ModelAndView buildingList(BuildingDTO dtos, HttpServletRequest request) {
 //        ModelAndView mav = new ModelAndView("admin/building-list");
@@ -28,7 +31,8 @@ public class BuildingController {
 //        mav.addObject("buildingList", buildingService.findAll());
 //        return mav;
 //    }
-
+    @Autowired
+    private IUserService userService;
     @GetMapping(value = "/admin/building-list")
     public ModelAndView buildingList(@ModelAttribute BuildingSearchRequest requestdto, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/list");
@@ -57,13 +61,17 @@ public class BuildingController {
         response.add(it1);
         response.add(it2);
         mav.addObject("buildingList", response);
-
+        mav.addObject("staffList", userService.getStaffs());
+        mav.addObject("districts", districtCode.type());
+        mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
 
     @GetMapping(value = "/admin/building-edit")
     public ModelAndView buildingEdit(@ModelAttribute("buildingEdit")BuildingDTO buildingDTO,HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/edit");
+        mav.addObject("districts", districtCode.type());
+        mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
     @GetMapping(value = "/admin/building-edit-{id}")
@@ -75,6 +83,8 @@ public class BuildingController {
         dto.setName("Five start BEN BEN");
 
         mav.addObject("buildingEdit", dto);
+        mav.addObject("districts", districtCode.type());
+        mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
 //@GetMapping(value = {"/admin/building-edit", "/admin/building-edit/{id}"})

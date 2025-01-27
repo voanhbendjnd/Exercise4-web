@@ -33,7 +33,20 @@ public class UserEntity extends BaseEntity {
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false))
+
     private List<RoleEntity> roles = new ArrayList<>();
+
+
+    @ManyToMany(mappedBy = "userEntities", fetch = FetchType.LAZY)
+    List<BuildingEntity> buildingEntityList = new ArrayList<>();
+    public List<BuildingEntity> getBuildingEntityList() {
+        return buildingEntityList;
+    }
+
+    public void setBuildingEntityList(List<BuildingEntity> buildingEntityList) {
+        this.buildingEntityList = buildingEntityList;
+    }
+
 
 
 //    @OneToMany(mappedBy="staffs", fetch = FetchType.LAZY)
